@@ -7,6 +7,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use App\Events\CampaignCreated;
+
 
 class CampaignController extends Controller
 {
@@ -39,6 +41,9 @@ class CampaignController extends Controller
                 'end_date' => $data['end_date'],
                 'targeting_criteria' => $data['targeting_criteria'] ?? null
             ]);
+
+            // Event::dispatch(new CampaignCreated($campaign));
+
 
             return response()->json($campaign, 201);
         } catch (QueryException $e) {
