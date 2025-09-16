@@ -10,7 +10,7 @@ class AdGroupController extends Controller
     public function index(Request $request)
     {
         return AdGroup::whereHas('campaign', function($q) use ($request) {
-            $q->where('tenant_id', $request->user()->tenant_id);
+            $q->where('tenant_id', $request->user()->tenants->first()->id);
         })->get();
     }
 
